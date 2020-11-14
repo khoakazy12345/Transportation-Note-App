@@ -1,0 +1,7 @@
+(Input: the list of location - Dropdown list)
+(We would allow users to manually create pins to create small notes to put on the map)
+1) Create a website 
+2) Match the APIs from Google into it: Distance Matrix API 
+3) Allow users to put small notes on the map
+4) Tailor the website
+
