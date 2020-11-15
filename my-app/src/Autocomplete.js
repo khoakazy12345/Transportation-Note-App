@@ -1,7 +1,7 @@
 // Autocomplete.js
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import MyGoogleMap from './MyGoogleMap.js';
 const Wrapper = styled.div`
   position: relative;
   align-items: center;
@@ -43,7 +43,11 @@ class AutoComplete extends Component {
     onPlaceChanged = ({ map, addplace } = this.props) => {
         const place = this.autoComplete.getPlace();
 
-        if (!place.geometry) return;
+        if (!place.geometry) {
+            addplace(place);
+            this.searchInput.blur();
+            return
+        }
         if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
         } else {
@@ -58,6 +62,7 @@ class AutoComplete extends Component {
     render() {
         return (
             <Wrapper>
+                <form>
                 <input
                     className="search-input"
                     ref={(ref) => {
@@ -67,6 +72,7 @@ class AutoComplete extends Component {
                     onFocus={this.clearSearchBox}
                     placeholder="Enter a location"
                 />
+                </form>
                 
             </Wrapper>
         );
