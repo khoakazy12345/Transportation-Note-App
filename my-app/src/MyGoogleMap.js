@@ -115,11 +115,17 @@ class MyGoogleMap extends Component {
     handleClick() {
         let targetplaces = this.state.targetplaces.slice();
         let count = this.state.count;
-        targetplaces.push([this.state.places[0], count]);
-        this.setState({
-            targetplaces: targetplaces,
-            count: count + 1,
-        })
+        if (this.state.places.length == 0){
+            alert("Please enter a specific location");
+        }
+        else {
+            targetplaces.push([this.state.places[0], count]);
+            this.setState({
+                targetplaces: targetplaces,
+                count: count + 1,
+            })
+            this.state.places.length = 0;
+        }
     }
     remove(order) {
         const targetplaces = this.state.targetplaces.slice();
