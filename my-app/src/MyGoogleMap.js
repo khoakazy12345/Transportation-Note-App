@@ -1,12 +1,9 @@
 // MyGoogleMaps.js
 import React, { Component } from 'react';
-
 import GoogleMapReact from 'google-map-react';
-
 import styled from 'styled-components';
-
-import AutoComplete from './Autocomplete';
-import Marker from './Marker';
+import AutoComplete from './Autocomplete.js';
+import Marker from './Marker.js';
 
 const Wrapper = styled.main`
   width: 100%;
@@ -14,8 +11,6 @@ const Wrapper = styled.main`
 `;
 
 class MyGoogleMap extends Component {
-
-
     state = {
         mapApiLoaded: false,
         mapInstance: null,
@@ -35,7 +30,6 @@ class MyGoogleMap extends Component {
     componentWillMount() {
         this.setCurrentLocation();
     }
-
 
     onMarkerInteraction = (childKey, childProps, mouse) => {
         this.setState({
@@ -87,9 +81,7 @@ class MyGoogleMap extends Component {
         const {
             mapApi
         } = this.state;
-
         const geocoder = new mapApi.Geocoder;
-
         geocoder.geocode({ 'location': { lat: this.state.lat, lng: this.state.lng } }, (results, status) => {
             console.log(results);
             console.log(status);
