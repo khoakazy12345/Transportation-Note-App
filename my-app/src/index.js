@@ -2,37 +2,44 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-
-
 class Body extends React.Component {
   constructor(props)  {
     super(props);
     this.state = {
       destination: [],
-      count: 0,
+      count: 1,
       text: "qeq",
     }
   }
   
   handleClick()  {
-    const destination = this.state.destination.slice();
-    destination.push(this.newText.value);
-    const count = this.state.count;
+    let destination = this.state.destination.slice();
+    let val = this.newText.value;
+    let count = this.state.count;
+    destination.push([val, count]);
+    console.log(destination[destination.length-1][1]);
     this.setState ({
       destination: destination,
       count: count + 1,
     })
-    console.log(destination[destination.length-1]);
+    document.getElementById("input").value = "";
   }
 
-  printOut()  {
-    let str = "";
-    for (let i = 0; i < this.state.destination.length; i++) {
-      str += this.state.destination[i] + "\n";
+  remove(order)  {
+    let destination = this.state.destination.slice();
+    for (let i = 0; i < destination.length; i++)  {
+      if (destination[i][1] === order) {
+        destination.splice(i,1);
+        break;
+      }
     }
-    return str;
+    const count = this.state.count;
+    this.setState ({
+      destination: destination,
+      count: count - 1,
+    })
   }
-  
+
   render() {
     return (     
       <body>
@@ -43,15 +50,20 @@ class Body extends React.Component {
         <div>
           <p>Introduction: The webpage provides you the comfort to pick the best routes on your journey to the customers</p>
         </div>
-        <div>
+        <form>
           <input id = "input" type = "text" placeholder = "Input your desired destination" ref={(ip) => {this.newText = ip}}></input>
-          <button onClick = {() => this.handleClick()}>Add</button>
-        </div>
+        </form>
+        <div>
+        <button onClick = {() => this.handleClick()}>Add</button>
         <ul>
-        {this.state.destination.map((item) => (
-          <li>{item}</li>
-        ))}
+          {this.state.destination.map((item) => (
+            <div class = "destination_list">
+              <li>{item[0]}</li>
+              <button name = {item[0]} onClick = {() => this.remove(item[1])}>Remove this item</button>
+            </div>
+          ))}
         </ul>
+        </div>
       </body>
     );
   }

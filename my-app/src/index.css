@@ -10,3 +10,8 @@ body{
   font-family: 'Cambria', sans-serif;
   align-self: middle;
 }
+
+.destination_list {
+  display: flex;
+  flex-direction: row;
+}
