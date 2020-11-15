@@ -179,7 +179,7 @@ class MyGoogleMap extends Component {
                 <ul>
                     {this.state.targetplaces.map((item) => (
                         <div class="destination_list">
-                            <li>Latitude: {item[0].geometry.location.lat()} Longtitude: {item[0].geometry.location.lng()}</li>
+                            {item[0].geometry === undefined ? function() { alert('click'); }: <li>Latitude: {item[0].geometry.location.lat()} Longtitude: {item[0].geometry.location.lng()}</li>}
                             <button name={item[0]} onClick={() => this.remove(item[1])}>Remove this item</button>
                         </div>
                     ))}
