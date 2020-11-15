@@ -24,6 +24,7 @@ class MyGoogleMap extends Component {
         places: [],
         center: [],
         targetplaces: [],
+        count: 1,
         zoom: 9,
         address: '',
         draggable: true,
@@ -119,15 +120,29 @@ class MyGoogleMap extends Component {
         }
     }
 
-    handleClick()  {
-        const targetplaces = this.state.targetplaces;
-        targetplaces.push(this.state.places[0]);
-        for (let i = 0; i < targetplaces.length; i++) {
-            console.log(targetplaces[i].geometry.location.lat());
-        }
-        console.log("Hello")
+    handleClick() {
+        let targetplaces = this.state.targetplaces.slice();
+        let count = this.state.count;
+        targetplaces.push([this.state.places[0], count]);
+        this.setState({
+            targetplaces: targetplaces,
+            count: count + 1,
+        })
     }
-
+    remove(order) {
+        const targetplaces = this.state.targetplaces.slice();
+        for (let i = 0; i < targetplaces.length; i++) {
+            if (targetplaces[i][1] === order) {
+                targetplaces.splice(i, 1);
+                break;
+            }
+        }
+        const count = this.state.count;
+        this.setState({
+            targetplaces: targetplaces,
+            count: count - 1,
+        })
+    }
     render() {
         const {
             places, mapApiLoaded, mapInstance, mapApi,
@@ -139,7 +154,7 @@ class MyGoogleMap extends Component {
                 {mapApiLoaded && (
                     <div>
                         <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
-                        <button onClick = {() => this.handleClick()}>Add</button>
+                        <button onClick={() => this.handleClick()}>Add</button>
                     </div>
                 )}
                 <GoogleMapReact
@@ -168,12 +183,15 @@ class MyGoogleMap extends Component {
 
 
                 </GoogleMapReact>
-
-                <div className="info-wrapper">
-                    <div className="map-details">Latitude: <span>{this.state.lat}</span>, Longitude: <span>{this.state.lng}</span></div>
-                    <div className="map-details">Zoom: <span>{this.state.zoom}</span></div>
-                    <div className="map-details">Address: <span>{this.state.address}</span></div>
-                </div>
+                <h3>Added places</h3>
+                <ul>
+                    {this.state.targetplaces.map((item) => (
+                        <div class="destination_list">
+                            <li>Latitude: {item[0].geometry.location.lat()} Longtitude: {item[0].geometry.location.lng()}</li>
+                            <button name={item[0]} onClick={() => this.remove(item[1])}>Remove this item</button>
+                        </div>
+                    ))}
+                </ul>
 
 
             </Wrapper >

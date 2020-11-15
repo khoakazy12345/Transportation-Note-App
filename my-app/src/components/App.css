@@ -55,4 +55,7 @@
     font-size: 1.2em;
     width: 80%;
   }
-  
+  .destination_list {
+    display: flex;
+    flex-direction: row;
+  }
