@@ -69,12 +69,18 @@ class MyGoogleMap extends Component {
     };
 
     addPlace = (place) => {
-        this.setState({
-            places: [place],
-            lat: place.geometry.location.lat(),
-            lng: place.geometry.location.lng()
-        });
-        this._generateAddress()
+        if (!place.geometry) {
+            this.state.places.length = 0;
+        }
+        else {
+            this.setState({
+                places: [place],
+                lat: place.geometry.location.lat(),
+                lng: place.geometry.location.lng()
+            });
+            this._generateAddress()
+        }
+        
     };
 
     _generateAddress() {
