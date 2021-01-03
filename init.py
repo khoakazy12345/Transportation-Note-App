@@ -70,7 +70,8 @@ for i in range(listLength):
     visited[nearest] = True
 
     for adj in range(listLength):
-        if cost[nearest][adj] == inf 
+        if cost[nearest][adj] == inf:
+            return 
 
 
 

@@ -6,3 +6,7 @@
 4) Tailor the website
 
 Key for Google API: AIzaSyBedtxstadq4LKcSsei2JpRSErkOiIkbJs
+
+Key features:
+1) Able to show to shortest path (Visible)
+2) Allow users to add sticky notes on the map
