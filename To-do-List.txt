@@ -5,3 +5,4 @@
 3) Allow users to put small notes on the map
 4) Tailor the website
 
+Key for Google API: AIzaSyBedtxstadq4LKcSsei2JpRSErkOiIkbJs

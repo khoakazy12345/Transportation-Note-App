@@ -55,10 +55,6 @@ visited = [[False]*listLength]*listLength
 disGraph = [inf]*listLength
 disGraph[src] = 0 
 
-
-
-
-
 def getNearest():
     minval = inf
     minNode = 0
