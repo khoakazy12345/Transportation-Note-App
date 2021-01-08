@@ -1,0 +1,8 @@
+.Wrapper {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+    padding: 20px;
+    text-align:center;
+}

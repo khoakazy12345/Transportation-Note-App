@@ -1,15 +1,7 @@
 // Autocomplete.js
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import MyGoogleMap from './MyGoogleMap.js';
-const Wrapper = styled.div`
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
-  text-align:center;
-`;
+import './Autocomplete.css';
+
 
 class AutoComplete extends Component {
     constructor(props) {
@@ -20,10 +12,10 @@ class AutoComplete extends Component {
     componentDidMount({ map, mapApi } = this.props) {
         const options = {
             // restrict your search to a specific type of result
-            types: ['address'],
             // restrict your search to a specific country, or an array of countries
             // componentRestrictions: { country: ['gb', 'us'] },
         };
+
         this.autoComplete = new mapApi.places.Autocomplete(
             this.searchInput,
             options,
@@ -61,7 +53,7 @@ class AutoComplete extends Component {
 
     render() {
         return (
-            <Wrapper>
+            <div className = "Wrapper">
                 <form>
                 <input
                     className="search-input"
@@ -73,8 +65,7 @@ class AutoComplete extends Component {
                     placeholder="Enter a location"
                 />
                 </form>
-                
-            </Wrapper>
+            </div>
         );
     }
 }

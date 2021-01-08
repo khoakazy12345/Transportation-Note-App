@@ -1,31 +1,30 @@
 // MyGoogleMaps.js
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import styled from 'styled-components';
 import AutoComplete from './Autocomplete.js';
 import Marker from './Marker.js';
-
-const Wrapper = styled.main`
-  width: 100%;
-  height: 100%;
-`;
+import "./MyGoogleMap.css";
 
 class MyGoogleMap extends Component {
-    state = {
-        mapApiLoaded: false,
-        mapInstance: null,
-        mapApi: null,
-        geoCoder: null,
-        places: [],
-        center: [],
-        targetplaces: [],
-        count: 1,
-        zoom: 9,
-        address: '',
-        draggable: true,
-        lat: null,
-        lng: null
-    };
+    constructor(props)  {
+        super(props);
+        this.state = {
+            mapApiLoaded: false,
+            mapInstance: null,
+            mapApi: null,
+            geoCoder: null,
+            places: [],
+            center: [],
+            targetplaces: [],
+            count: 1,
+            zoom: 9,
+            address: '',
+            draggable: true,
+            lat: null,
+            lng: null
+        };
+    }
+    
 
     componentWillMount() {
         this.setCurrentLocation();
@@ -38,6 +37,7 @@ class MyGoogleMap extends Component {
             lng: mouse.lng
         });
     }
+
     onMarkerInteractionMouseUp = (childKey, childProps, mouse) => {
         this.setState({ draggable: true });
         this._generateAddress();
@@ -84,9 +84,7 @@ class MyGoogleMap extends Component {
     };
 
     _generateAddress() {
-        const {
-            mapApi
-        } = this.state;
+        const {mapApi} = this.state;
         const geocoder = new mapApi.Geocoder;
         geocoder.geocode({ 'location': { lat: this.state.lat, lng: this.state.lng } }, (results, status) => {
             console.log(results);
@@ -133,6 +131,7 @@ class MyGoogleMap extends Component {
             this.state.places.length = 0;
         }
     }
+
     remove(order) {
         const targetplaces = this.state.targetplaces.slice();
         for (let i = 0; i < targetplaces.length; i++) {
@@ -147,14 +146,13 @@ class MyGoogleMap extends Component {
             count: count - 1,
         })
     }
+    
     render() {
-        const {
-            places, mapApiLoaded, mapInstance, mapApi,
-        } = this.state;
+        const {mapApiLoaded, mapInstance, mapApi} = this.state;
 
 
         return (
-            <Wrapper>
+            <div className = "Wrapper">
                 {mapApiLoaded && (
                     <div>
                         <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
@@ -185,7 +183,6 @@ class MyGoogleMap extends Component {
                         lng={this.state.lng}
                     />
 
-
                 </GoogleMapReact>
                 <h3>Added places</h3>
                 <ul>
@@ -197,8 +194,7 @@ class MyGoogleMap extends Component {
                     ))}
                 </ul>
 
-
-            </Wrapper >
+            </div>
         );
     }
 }
