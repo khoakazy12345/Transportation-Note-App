@@ -5,8 +5,8 @@
 3) Allow users to put small notes on the map
 4) Tailor the website
 
-Key for Google API: AIzaSyBedtxstadq4LKcSsei2JpRSErkOiIkbJs
+Key for Google API: AIzaSyD3C-R7oog-Ni87FFRrE-BYQMaKhX9vLAE
 
-Key features:
-1) Able to show to shortest path (Visible)
-2) Allow users to add sticky notes on the map
+Target:
++ Front-end: Add markers, display routes, and tailoring the UI.
++ Back-end: Return the true list (not optimal at this time).
