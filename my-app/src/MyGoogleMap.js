@@ -23,6 +23,7 @@ class MyGoogleMap extends Component {
             lat: null,
             lng: null
         };
+        this.handleClick = this.handleClick.bind(this);
     }
     
 
@@ -39,11 +40,11 @@ class MyGoogleMap extends Component {
     }
 
     onMarkerInteractionMouseUp = (childKey, childProps, mouse) => {
-        this.setState({ draggable: true });
-        this._generateAddress();
+        this.setState({ draggable: true});
+        this.generateAddress();
     }
 
-    _onChange = ({ center, zoom }) => {
+    onChange = ({ center, zoom }) => {
         this.setState({
             center: center,
             zoom: zoom,
@@ -51,7 +52,7 @@ class MyGoogleMap extends Component {
 
     }
 
-    _onClick = (value) => {
+    onClick = (value) => {
         this.setState({
             lat: value.lat,
             lng: value.lng
@@ -65,7 +66,7 @@ class MyGoogleMap extends Component {
             mapApi: maps,
         });
 
-        this._generateAddress();
+        this.generateAddress();
     };
 
     addPlace = (place) => {
@@ -78,12 +79,12 @@ class MyGoogleMap extends Component {
                 lat: place.geometry.location.lat(),
                 lng: place.geometry.location.lng()
             });
-            this._generateAddress()
+            this.generateAddress()
         }
         
     };
 
-    _generateAddress() {
+    generateAddress() {
         const {mapApi} = this.state;
         const geocoder = new mapApi.Geocoder;
         geocoder.geocode({ 'location': { lat: this.state.lat, lng: this.state.lng } }, (results, status) => {
@@ -163,7 +164,7 @@ class MyGoogleMap extends Component {
                     center={this.state.center}
                     zoom={this.state.zoom}
                     draggable={this.state.draggable}
-                    onChange={this._onChange}
+                    onChange={this.onChange}
                     onChildMouseDown={this.onMarkerInteraction}
                     onChildMouseUp={this.onMarkerInteractionMouseUp}
                     onChildMouseMove={this.onMarkerInteraction}
@@ -183,11 +184,18 @@ class MyGoogleMap extends Component {
                         lng={this.state.lng}
                     />
 
+                    <Marker
+                        text={this.state.address}
+                        lat={92.9634}
+                        lng={85.6681}
+                    />
+
                 </GoogleMapReact>
                 <h3>Added places</h3>
                 <ul>
                     {this.state.targetplaces.map((item) => (
                         <div class="destination_list">
+                            {item[0].geometry.location.address}
                             {item[0].geometry === undefined ? function() { alert('click'); }: <li>Latitude: {item[0].geometry.location.lat()} Longtitude: {item[0].geometry.location.lng()}</li>}
                             <button name={item[0]} onClick={() => this.remove(item[1])}>Remove this item</button>
                         </div>
