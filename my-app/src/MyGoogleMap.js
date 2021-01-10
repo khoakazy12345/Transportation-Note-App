@@ -74,6 +74,7 @@ class MyGoogleMap extends Component {
         this.generateAddress();
     };
 
+    // After we clicked to add place, this function will refocus our view to the destination we just picked to the Google Map
     addPlace = (place) => {
         if (!place.geometry) {
             this.state.places.length = 0;
@@ -86,6 +87,7 @@ class MyGoogleMap extends Component {
             });
             this.generateAddress()
         } 
+        console.log(place);
     };
 
     generateAddress() {
@@ -132,6 +134,7 @@ class MyGoogleMap extends Component {
             })
             this.state.places.length = 0;
         }
+        console.log(this.state.places)
     }
 
     remove(order) {
@@ -150,17 +153,15 @@ class MyGoogleMap extends Component {
     }
     
     render() {
-        const {mapApiLoaded, mapInstance, mapApi} = this.state;
-
-
         return (
             <div className = "Wrapper">
-                {mapApiLoaded && (
+                {this.state.mapApiLoaded && (
                     <div>
-                        <AutoComplete map={mapInstance} mapApi={mapApi} addplace={this.addPlace} />
+                        <AutoComplete map={this.state.mapInstance} mapApi={this.state.mapApi} addplace={this.addPlace} />
                         <button onClick={() => this.handleClick()}>Add</button>
                     </div>
                 )}
+
                 <GoogleMapReact
                     center={this.state.center}
                     zoom={this.state.zoom}
@@ -198,7 +199,7 @@ class MyGoogleMap extends Component {
                         <div>
                             <div>{item[0].name}</div>
                             {item[0].geometry === undefined 
-                            ? function() { alert('click'); }
+                            ? function() {alert('click');}
                             :   <ul>
                                     <li>Latitude: {item[0].geometry.location.lat()} Longtitude: {item[0].geometry.location.lng()}</li>
                                     <li>Address: {item[0].formatted_address}</li>

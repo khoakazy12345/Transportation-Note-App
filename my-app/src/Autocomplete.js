@@ -32,7 +32,7 @@ class AutoComplete extends Component {
         this.searchInput.value = '';
     }
 
-    onPlaceChanged = ({ map, addplace } = this.props) => {
+    onPlaceChanged = ({map, addplace } = this.props) => {
         const place = this.autoComplete.getPlace();
 
         if (!place.geometry) {
