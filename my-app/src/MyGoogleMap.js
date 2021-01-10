@@ -89,12 +89,8 @@ class MyGoogleMap extends Component {
     };
 
     generateAddress() {
-        const {mapApi} = this.state;
-        const geocoder = new mapApi.Geocoder;
+        const geocoder = new this.state.mapApi.Geocoder;
         geocoder.geocode({ 'location': { lat: this.state.lat, lng: this.state.lng } }, (results, status) => {
-            console.log(results);
-            console.log(status);
-            console.log(this.state.targetplaces[0]);
             if (status === 'OK') {
                 if (results[0]) {
                     this.zoom = 12;
@@ -182,21 +178,16 @@ class MyGoogleMap extends Component {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
                 >
-
-                    {/* {this.state.targetplaces.map((item) =>  ( 
-                        <div>
-                            <Marker
-                            text={this.state.address}
-                            lat={item[0].geometry.location.lat()}
-                            lng={item[0].geometry.location.lng()}
-                            />
-                        </div>
-                    ))} */}
-
                     <Marker
                         text={this.state.address}
                         lat={this.state.lat}
                         lng={this.state.lng}
+                    />
+
+                    <Marker
+                        text={"hi"}
+                        lat={40.7128}
+                        lng={74.0060}
                     />
 
 
