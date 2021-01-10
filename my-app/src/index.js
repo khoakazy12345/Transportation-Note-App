@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <body>
         <header id="header">
-          <h1>Welcome to the Tranportation Map Notes</h1>
+          <h1>Welcome to the Transportation Map Notes</h1>
           <h2>This webpage is created as a Hackathon Project by team CrawFish</h2>
         </header>
 

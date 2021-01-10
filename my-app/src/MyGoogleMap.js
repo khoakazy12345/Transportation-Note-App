@@ -17,12 +17,19 @@ class MyGoogleMap extends Component {
             center: [],
             targetplaces: [],
             count: 1,
-            zoom: 9,
+            zoom: 15,
             address: '',
             draggable: true,
             lat: null,
             lng: null
         };
+        this.onMarkerInteraction = this.onMarkerInteraction.bind(this);
+        this.onMarkerInteractionMouseUp = this.onMarkerInteractionMouseUp.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onClick = this.onClick.bind(this);
+        this.apiHasLoaded = this.apiHasLoaded.bind(this);
+        this.addPlace = this.addPlace.bind(this);
+        this.generateAddress = this.generateAddress.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
     
@@ -40,7 +47,7 @@ class MyGoogleMap extends Component {
     }
 
     onMarkerInteractionMouseUp = (childKey, childProps, mouse) => {
-        this.setState({ draggable: true});
+        this.setState({draggable: true});
         this.generateAddress();
     }
 
@@ -49,7 +56,6 @@ class MyGoogleMap extends Component {
             center: center,
             zoom: zoom,
         });
-
     }
 
     onClick = (value) => {
@@ -65,7 +71,6 @@ class MyGoogleMap extends Component {
             mapInstance: map,
             mapApi: maps,
         });
-
         this.generateAddress();
     };
 
@@ -80,8 +85,7 @@ class MyGoogleMap extends Component {
                 lng: place.geometry.location.lng()
             });
             this.generateAddress()
-        }
-        
+        } 
     };
 
     generateAddress() {
@@ -90,6 +94,7 @@ class MyGoogleMap extends Component {
         geocoder.geocode({ 'location': { lat: this.state.lat, lng: this.state.lng } }, (results, status) => {
             console.log(results);
             console.log(status);
+            console.log(this.state.targetplaces[0]);
             if (status === 'OK') {
                 if (results[0]) {
                     this.zoom = 12;
@@ -169,7 +174,7 @@ class MyGoogleMap extends Component {
                     onChildMouseUp={this.onMarkerInteractionMouseUp}
                     onChildMouseMove={this.onMarkerInteraction}
                     onChildClick={() => console.log('child click')}
-                    onClick={this._onClick}
+                    onClick={this.onClick}
                     bootstrapURLKeys={{
                         key: 'AIzaSyD3C-R7oog-Ni87FFRrE-BYQMaKhX9vLAE',
                         libraries: ['places', 'geometry'],
@@ -178,30 +183,39 @@ class MyGoogleMap extends Component {
                     onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
                 >
 
+                    {/* {this.state.targetplaces.map((item) =>  ( 
+                        <div>
+                            <Marker
+                            text={this.state.address}
+                            lat={item[0].geometry.location.lat()}
+                            lng={item[0].geometry.location.lng()}
+                            />
+                        </div>
+                    ))} */}
+
                     <Marker
                         text={this.state.address}
                         lat={this.state.lat}
                         lng={this.state.lng}
                     />
 
-                    <Marker
-                        text={this.state.address}
-                        lat={92.9634}
-                        lng={85.6681}
-                    />
 
                 </GoogleMapReact>
                 <h3>Added places</h3>
                 <ul>
                     {this.state.targetplaces.map((item) => (
-                        <div class="destination_list">
-                            {item[0].geometry.location.address}
-                            {item[0].geometry === undefined ? function() { alert('click'); }: <li>Latitude: {item[0].geometry.location.lat()} Longtitude: {item[0].geometry.location.lng()}</li>}
+                        <div>
+                            <div>{item[0].name}</div>
+                            {item[0].geometry === undefined 
+                            ? function() { alert('click'); }
+                            :   <ul>
+                                    <li>Latitude: {item[0].geometry.location.lat()} Longtitude: {item[0].geometry.location.lng()}</li>
+                                    <li>Address: {item[0].formatted_address}</li>
+                                </ul>}
                             <button name={item[0]} onClick={() => this.remove(item[1])}>Remove this item</button>
                         </div>
                     ))}
                 </ul>
-
             </div>
         );
     }
