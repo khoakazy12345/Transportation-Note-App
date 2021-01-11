@@ -9,45 +9,39 @@ class AutoComplete extends Component {
         this.clearSearchBox = this.clearSearchBox.bind(this);
     }
 
-    componentDidMount({ map, mapApi } = this.props) {
+    componentDidMount() {
         const options = {
             // restrict your search to a specific type of result
             // restrict your search to a specific country, or an array of countries
             // componentRestrictions: { country: ['gb', 'us'] },
         };
 
-        this.autoComplete = new mapApi.places.Autocomplete(
+        this.autoComplete = new this.props.mapApi.places.Autocomplete(
             this.searchInput,
             options,
         );
         this.autoComplete.addListener('place_changed', this.onPlaceChanged);
-        this.autoComplete.bindTo('bounds', map);
+        this.autoComplete.bindTo('bounds', this.props.map);
     }
 
-    componentWillUnmount({ mapApi } = this.props) {
-        mapApi.event.clearInstanceListeners(this.searchInput);
+    componentWillUnmount() {
+        this.props.mapApi.event.clearInstanceListeners(this.searchInput);
     }
 
     clearSearchBox() {
         this.searchInput.value = '';
     }
 
-    onPlaceChanged = ({map, addplace } = this.props) => {
+    onPlaceChanged = () => {
         const place = this.autoComplete.getPlace();
-
-        if (!place.geometry) {
-            addplace(place);
-            this.searchInput.blur();
-            return
-        }
         if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
+            this.props.map.fitBounds(place.geometry.viewport);
         } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);
+            this.props.map.setCenter(place.geometry.location);
+            this.props.map.setZoom(17);
         }
 
-        addplace(place);
+        this.props.addplace(place);
         this.searchInput.blur();
     };
 
