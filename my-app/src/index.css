@@ -1,13 +1,25 @@
-.Google-Map {
-    height: 60vh;
-    margin: 10px 50px;
-    filter: drop-shadow(-1px 5px 3px #ccc);
+body    {
+    margin: 0;
+    padding: 0;
+}
+
+.NavBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 10vh;
 }
 
 .Header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: aqua;
+    background-color: #333;
     height: 20vh;
+}
+
+.Google-Map {
+    height: 60vh;
+    margin: 10px 50px;
+    filter: drop-shadow(-1px 5px 3px #ccc);
 }

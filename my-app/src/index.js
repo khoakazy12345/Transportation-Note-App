@@ -3,19 +3,29 @@ import ReactDOM from 'react-dom';
 
 import MyGoogleMap from './MyGoogleMap.js';
 import Header from './Header.js';
+import Navbar from './Navbar.js';
+import Map from './Map.js';
 import './index.css';
 
 class App extends React.Component {
 	render() {
     	return (
       	<body>
+		  	<div className="NavBar">
+			  <Navbar />
+			</div>
+
         	<div className="Header">
 				<Header />
         	</div>
 
-        	<div className="Google-Map">
+        	{/* <div className="Google-Map">
           		<MyGoogleMap />
-        	</div>
+        	</div> */}
+
+			<div>
+				<Map/>
+			</div>
       	</body>
     	);
   	}

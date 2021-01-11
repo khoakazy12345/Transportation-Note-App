@@ -179,6 +179,12 @@ class MyGoogleMap extends Component {
                     yesIWantToUseGoogleMapApiInternals
                     onGoogleApiLoaded={({ map, maps }) => this.apiHasLoaded(map, maps)}
                 >
+                
+                    <Marker
+                        text={this.state.address}
+                        lat={this.state.lat}
+                        lng={this.state.lng}
+                    />
 
                     {this.state.targetplaces.map((item)   =>  {
                         return (
