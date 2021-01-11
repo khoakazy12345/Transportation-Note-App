@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import MyGoogleMap from './MyGoogleMap.js';
 import Header from './Header.js';
 import Navbar from './Navbar.js';
 import Map from './Map.js';
