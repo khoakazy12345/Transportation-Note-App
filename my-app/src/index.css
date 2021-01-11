@@ -1,75 +1,13 @@
-#header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 25px;
-  font-family: 'Cambria', sans-serif;
-  align-self: middle;
+.Google-Map {
+    height: 60vh;
+    margin: 10px 50px;
+    filter: drop-shadow(-1px 5px 3px #ccc);
 }
 
-.destination_list {
-  display: flex;
-  flex-direction: row;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.main-wrapper {
-  height: 60vh;
-  margin: 10px 50px;
-  filter: drop-shadow(-1px 5px 3px #ccc);
-}
-.info-wrapper {
-  margin-top: 15px;
-}
-.map-details {
-  text-align: center;
-  font-size: 1.2em;
-}
-.map-details span {
-  font-weight: bold;
-}
-.search-input {
-  font-size: 1.2em;
-  width: 80%;
-}
-.destination_list {
-  display: flex;
-  flex-direction: row;
+.Header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: aqua;
+    height: 20vh;
 }

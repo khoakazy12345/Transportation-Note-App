@@ -6,3 +6,8 @@
     padding: 20px;
     text-align:center;
 }
+
+.search-input {
+    font-size: 1.2em;
+    width: 70%;
+  }

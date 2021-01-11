@@ -2,27 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import MyGoogleMap from './MyGoogleMap.js';
+import Header from './Header.js';
 import './index.css';
 
 class App extends React.Component {
-  render() {
-    return (
-      <body>
-        <header id="header">
-          <h1>Welcome to the Transportation Map Notes</h1>
-          <h2>This webpage is created as a Hackathon Project by team CrawFish</h2>
-        </header>
+	render() {
+    	return (
+      	<body>
+        	<div className="Header">
+				<Header />
+        	</div>
 
-        <div>
-          <p>Introduction: The webpage provides you the comfort to pick the best routes on your journey to the customers</p>
-        </div>
-
-        <div className="main-wrapper">
-          <MyGoogleMap />
-        </div>
-      </body>
-    );
-  }
+        	<div className="Google-Map">
+          		<MyGoogleMap />
+        	</div>
+      	</body>
+    	);
+  	}
 }
 
 

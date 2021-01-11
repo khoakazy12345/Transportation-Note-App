@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+
+h1, h2 {
+    text-align: center;
+    padding: -5vh;
+    font-family: 'Raleway', cursive;
+}
+
+h1  {
+    font-size: 5vh;
+}
+
+h2  {
+    font-size: 4vh;
+}
