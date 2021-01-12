@@ -1,5 +1,5 @@
 import React from "react";
-const _ = require("lodash");
+const lodash = require("lodash");
 const { compose, withProps, lifecycle } = require("recompose");
 import {withGoogleMap, GoogleMap, withScriptjs, Marker, DirectionsRenderer} from "react-google-maps";
 const {SearchBox} = require("react-google-maps/lib/components/places/SearchBox");
@@ -70,7 +70,8 @@ const MyMapComponent = compose(
     	loadingElement: <div style={{ height: `100%` }} />,
     	containerElement: <div style={{ height: `400px` }} />,
     	mapElement: <div style={{ height: `100%` }} />
-  	}),
+	}),
+	
   	lifecycle({
     	componentWillMount() {
       		const refs = {};
@@ -80,7 +81,7 @@ const MyMapComponent = compose(
         		center: {lat: 41.9, lng: -87.624},
         		markers: [],
         		onMapMounted: ref => {
-					  refs.map = ref;
+					refs.map = ref;
 				},
 
         		onBoundsChanged: () => {
@@ -110,8 +111,9 @@ const MyMapComponent = compose(
           		const nextMarkers = places.map(place => ({
             		position: place.geometry.location
 				  }));
-				  
-          		const nextCenter = _.get(nextMarkers, "0.position",this.state.center);
+				
+				// Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place.
+          		const nextCenter = lodash.get(nextMarkers, "0.position", this.state.center);
 
           	this.setState({
             	center: nextCenter,
@@ -131,7 +133,7 @@ const MyMapComponent = compose(
       			onPlacesChanged={props.onPlacesChanged}>
       			<input
         			type="text"
-        			placeholder="Customized your placeholder"
+        			placeholder="Search Places..."
         			style={{
           				boxSizing: `border-box`,
           				border: `1px solid transparent`,
@@ -156,7 +158,7 @@ const MyMapComponent = compose(
       			<Marker key={index} position={{ lat: item.latitude, lng: item.longitude }}/>
     		))}
 
-    		{targetplaces.length >= 100 && (
+    		{targetplaces.length >= 3 && (
       			<MapDirectionsRenderer places={targetplaces} travelMode={google.maps.TravelMode.DRIVING} />
     		)}
 
