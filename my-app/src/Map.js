@@ -1,18 +1,23 @@
 import React from "react";
+import {withGoogleMap, GoogleMap, withScriptjs, Marker, DirectionsRenderer} from "react-google-maps";
+import './Map.css'
 const lodash = require("lodash");
 const { compose, withProps, lifecycle } = require("recompose");
-import {withGoogleMap, GoogleMap, withScriptjs, Marker, DirectionsRenderer} from "react-google-maps";
 const {SearchBox} = require("react-google-maps/lib/components/places/SearchBox");
 
 const targetplaces = [];
 const searchplaces = [];
+let defaultLat = 14.0583;
+let defaultLng = 108.2772;
 
 function handleClick() {
-  	var lastLocation = searchplaces[searchplaces.length - 1].geometry.location;
+	var lastLocation = searchplaces[searchplaces.length - 1].geometry.location;
+	defaultLat = lastLocation.lat();
+	defaultLng = lastLocation.lng();
   	targetplaces.push({
     	latitude: lastLocation.lat(),
     	longitude: lastLocation.lng()
-  	});
+	});
 }
 
 class MapDirectionsRenderer extends React.Component {
@@ -25,8 +30,7 @@ class MapDirectionsRenderer extends React.Component {
 	}
 
   	componentWillMount() {
-    	const { places, travelMode } = this.props;
-
+    	const {places, travelMode} = this.props;
     	const waypoints = places.map(p => ({
       		location: { lat: p.latitude, lng: p.longitude },
       		stopover: true
@@ -97,7 +101,8 @@ const MyMapComponent = compose(
 				
         		onPlacesChanged: () => {
           			const places = refs.searchBox.getPlaces();
-          			const bounds = new google.maps.LatLngBounds();
+					const bounds = new google.maps.LatLngBounds();
+					console.log(this.props)
 
           			places.forEach(place => {
             			searchplaces.push(place);
@@ -125,7 +130,7 @@ const MyMapComponent = compose(
   	}),
   	withScriptjs,
   	withGoogleMap)	(props => (
-  		<GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }}>
+  		<GoogleMap defaultZoom={8} center={{ lat: defaultLat, lng: defaultLng}}>
     		<SearchBox
       			ref={props.onSearchBoxMounted}
       			bounds={props.bounds}
@@ -134,19 +139,7 @@ const MyMapComponent = compose(
       			<input
         			type="text"
         			placeholder="Search Places..."
-        			style={{
-          				boxSizing: `border-box`,
-          				border: `1px solid transparent`,
-          				width: `240px`,
-          				height: `32px`,
-          				marginTop: `27px`,
-          				padding: `0 12px`,
-          				borderRadius: `3px`,
-          				boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-          				fontSize: `14px`,
-          				outline: `none`,
-          				textOverflow: `ellipses`
-        			}}
+					className="Input_Box"
       			/>
     		</SearchBox>
 
@@ -166,6 +159,12 @@ const MyMapComponent = compose(
   		</GoogleMap>
 ));
 
-const ReactGoogleMaps = () => [<MyMapComponent key="map" />];
+class ReactGoogleMaps extends React.Component	{
+	render()	{
+		return	(
+			<MyMapComponent/>
+		)
+	}
+}
 
 export default ReactGoogleMaps;

@@ -17,7 +17,7 @@ class App extends React.Component {
 				<Header />
         	</div>
 
-			<div>
+			<div className="Google-Map">
 				<Map/>
 			</div>
       	</body>
