@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchBar.css';
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 class LocationSearchInput extends React.Component {
@@ -29,22 +30,20 @@ class LocationSearchInput extends React.Component {
                 value={this.state.address}
                 onChange={this.handleChange}
                 onSelect={this.handleSelect}
+                className="DropDownInput1"
             >
                 {({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
-                    <div>
-                        <input {...getInputProps({placeholder: 'Search Places...', className: 'location-search-input'})}/>
+                    <div className="AllInput">
+                        <input {...getInputProps({placeholder: 'Search Places...', className: 'SearchBar'})}/>
                         <div>
                             {loading && <div>Loading...</div>}
                             {suggestions.map(suggestion => {
-                                const className = suggestion.active
-                                    ? 'suggestion-item--active'
-                                    : 'suggestion-item';
-                                // inline style for demonstration purpose
+                                const className = "DropDownChoice"
                                 const style = suggestion.active
-                                    ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                    ? { backgroundColor: '#757171', cursor: 'pointer' }
                                     : { backgroundColor: '#ffffff', cursor: 'pointer' };
                                 return (
-                                    <div {...getSuggestionItemProps(suggestion, {className, style,})}>
+                                    <div {...getSuggestionItemProps(suggestion, {className, style})}>
                                         <span>{suggestion.description}</span>
                                     </div>
                                 );

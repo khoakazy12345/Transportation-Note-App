@@ -90,12 +90,20 @@ class ReactGoogleMaps extends React.Component {
 				<div className="LocationSearchInput">
 					<LocationSearchInput onClick={this.handleSearchBarClick}/>
 				</div>
+
 				<div className="MyMap">
 					<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList} 
 					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} showMeThePathText={this.state.showMeThePathText}/>
 				</div>
-				<button onClick={this.handleButtonClick}>Add Destination</button>
-				<button onClick={this.handleShowMeThePath}>{this.state.showMeThePathText}</button>
+
+				<div>
+					<button onClick={this.handleButtonClick} className="AddButton">Add Destination</button>
+				</div>
+				
+				<div>
+					<button onClick={this.handleShowMeThePath} className="ShowPathButton">{this.state.showMeThePathText}</button>
+				</div>
+				
 			</div>
 		)
 	}

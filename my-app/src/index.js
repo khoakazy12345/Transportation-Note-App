@@ -9,9 +9,9 @@ class App extends React.Component {
 	render() {
     	return (
       	<body>
-		  	<div className="NavBar">
+		  	{/* <div className="NavBar">
 			  <Navbar />
-			</div>
+			</div> */}
 
         	<div className="Header">
 				<Header />

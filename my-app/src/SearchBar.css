@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+
+.SearchBar {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border: honeydew;
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 16px;
+    font-size: 16px;
+    font-family: 'Merriweather', serif;
+    border-radius: 2px;
+    outline: none;
+}
+
+.DropDownChoice {
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
+    border: honeydew;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    padding: 16px;
+    font-size: 16px;
+    font-family: 'Merriweather', serif;
+    outline: none;
+}

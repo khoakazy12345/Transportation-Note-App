@@ -1,14 +1,59 @@
 .MyMapComponent {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     height: 100%;
-    background-color: beige;
 }
 
 .LocationSearchInput    {
-    height: 10%;
-    background-color: aqua;
+    height: 20%;
 }
 
 .MyMap  {
+    margin-top: 100px;
     height: 100%;
-    background-color: blue;
+}
+
+.LocationSearchInput  {
+    display: inline;
+    justify-self: center;
+}
+
+.AddButton  {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+    border: 2px solid black;
+    border-color: #e7e7e7;
+    color: #555555;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.AddButton:hover    {
+    background: #555555;
+    color: white;
+}
+
+.ShowPathButton  {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+    border: 2px solid black;
+    border-color: #e7e7e7;
+    color: #555555;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 100px;
+}
+
+.ShowPathButton:hover    {
+    background: #555555;
+    color: white;
 }
