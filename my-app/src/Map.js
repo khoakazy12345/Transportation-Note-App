@@ -3,7 +3,7 @@ import { withGoogleMap, GoogleMap, withScriptjs, Marker} from "react-google-maps
 import MapDirectionsRenderer from './MapDirtection.js';
 import './Map.css'
 import LocationSearchInput from './SearchBar.js';
-const { compose, withProps, lifecycle } = require("recompose");
+const { compose, withProps } = require("recompose");
 
 
 const MyMapComponent = compose(
@@ -24,9 +24,10 @@ const MyMapComponent = compose(
 				<Marker position={{lat: item.latitude, lng: item.longitude}} />
 			))}
 			
-    		{props.markerplace.length >= 2 && (
+    		{props.markerplace.length >= 2 && props.showMeThePath && (
       			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} />
     		)}
+
 		</GoogleMap>
 	));
 
@@ -39,6 +40,8 @@ class ReactGoogleMaps extends React.Component {
 			longitude: 106.6297,
 			markerList: [],
 			searchList: [],
+			showMeThePathText: "Show Path",
+			showMeThePath: false
 		}
 		this.handleSearchBarClick = this.handleSearchBarClick.bind(this);
 		this.handleButtonClick = this.handleButtonClick.bind(this);
@@ -65,12 +68,30 @@ class ReactGoogleMaps extends React.Component {
 		console.log(this.state.markerList);
 	}
 
+	handleShowMeThePath = () =>	{
+		var newShowMeThePath = this.state.showMeThePath;
+		this.setState({
+			showMeThePath: !newShowMeThePath
+		})
+		if (this.state.showMeThePathText == "Show Path")	{
+			this.setState({
+				showMeThePathText: "Hide Path"
+			})
+		}	else	{
+			this.setState({
+				showMeThePathText: "Show Path"
+			})
+		}
+	}
+
 	render() {
 		return (
 			<div>
 				<LocationSearchInput onClick={this.handleSearchBarClick}/>
-				<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList} markerplace={this.state.markerList}/>
+				<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList} 
+				markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} showMeThePathText={this.state.showMeThePathText}/>
 				<button onClick={this.handleButtonClick}>Add Destination</button>
+				<button onClick={this.handleShowMeThePath}>{this.state.showMeThePathText}</button>
 			</div>
 		)
 	}
