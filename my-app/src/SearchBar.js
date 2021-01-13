@@ -7,8 +7,12 @@ class LocationSearchInput extends React.Component {
         this.state = { address: '' };
     }
 
+    handleClick = () =>  {
+        console.log("hello");
+    }
+
     handleChange = address => {
-        this.setState({ address });
+        this.setState({ address: address });
     };
 
     handleSelect = address => {
@@ -16,6 +20,7 @@ class LocationSearchInput extends React.Component {
             .then(results => getLatLng(results[0]))
             .then(latLng => this.props.onClick(latLng.lat, latLng.lng))
             .catch(error => console.error('Error', error));
+        this.setState({ address: address });
     };
 
     render() {
@@ -25,14 +30,9 @@ class LocationSearchInput extends React.Component {
                 onChange={this.handleChange}
                 onSelect={this.handleSelect}
             >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                {({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
                     <div>
-                        <input
-                            {...getInputProps({
-                                placeholder: 'Search Places ...',
-                                className: 'location-search-input',
-                            })}
-                        />
+                        <input {...getInputProps({placeholder: 'Search Places...', className: 'location-search-input'})}/>
                         <div>
                             {loading && <div>Loading...</div>}
                             {suggestions.map(suggestion => {
@@ -44,12 +44,7 @@ class LocationSearchInput extends React.Component {
                                     ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                                     : { backgroundColor: '#ffffff', cursor: 'pointer' };
                                 return (
-                                    <div
-                                        {...getSuggestionItemProps(suggestion, {
-                                            className,
-                                            style,
-                                        })}
-                                    >
+                                    <div {...getSuggestionItemProps(suggestion, {className, style,})}>
                                         <span>{suggestion.description}</span>
                                     </div>
                                 );
