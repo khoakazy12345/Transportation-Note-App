@@ -7,7 +7,7 @@ body    {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    height: 10vh;
+    height: 8vh;
 }
 
 .Header {
@@ -19,7 +19,7 @@ body    {
 }
 
 .Google-Map {
-    height: 80vh;
-    margin: 10px 50px;
+    height: 60vh;
+    background-color: aqua;
     filter: drop-shadow(-1px 5px 3px #ccc);
 }

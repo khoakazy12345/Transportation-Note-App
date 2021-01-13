@@ -1,7 +1,6 @@
 import React from "react";
-import { withGoogleMap, GoogleMap, withScriptjs, Marker, DirectionsRenderer } from "react-google-maps";
+import { DirectionsRenderer } from "react-google-maps";
 import './Map.css'
-const { compose, withProps, lifecycle } = require("recompose");
 
 class MapDirectionsRenderer extends React.Component {
 	constructor(props) {
@@ -14,7 +13,7 @@ class MapDirectionsRenderer extends React.Component {
 
 	componentWillMount() {
 		const { places, travelMode } = this.props;
-		const waypoints = places.map(p => ({
+		const waypoints = places.map( p => ({
 			location: { lat: p.latitude, lng: p.longitude },
 			stopover: true
 		}));
