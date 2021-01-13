@@ -13,7 +13,7 @@
 
 .MyMap  {
     margin-top: 100px;
-    height: 100%;
+    height: 75%;
 }
 
 .LocationSearchInput  {
@@ -54,7 +54,6 @@
     font-size: 20px;
     font-family: 'Merriweather', serif;
     cursor: pointer;
-    margin-bottom: 100px;
 }
 
 .ShowPathButton:hover    {

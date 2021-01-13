@@ -20,6 +20,10 @@ body    {
 }
 
 .Google-Map {
-    height: 80vh;
-    filter: drop-shadow(-1px 5px 3px #ccc);
+    height: 120vh;
+}
+
+.Footer {
+    background-color: #333;
+    height: 20vh;
 }
