@@ -1,5 +1,6 @@
 import React from "react";
 import { DirectionsRenderer } from "react-google-maps";
+import SimpleDialogDemo from './AlertBox.js';
 import './Map.css'
 
 class MapDirectionsRenderer extends React.Component {
@@ -41,7 +42,8 @@ class MapDirectionsRenderer extends React.Component {
 
 	render() {
 		if (this.state.error) {
-			return <h1>{this.state.error}</h1>;
+			console.log("Lagging");
+			return(<SimpleDialogDemo/>);
 		}
 		return (
 			this.state.directions && (
