@@ -33,8 +33,8 @@ class AlertDialog extends React.Component {
                     <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Looks like there is no driving route through all you destination. Consider dropping some of them.
-                    </DialogContentText>
+                            Looks like there is no driving route through all you destinations. Consider dropping some of them.
+                        </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary" autoFocus>

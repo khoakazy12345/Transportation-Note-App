@@ -42,7 +42,6 @@ class MapDirectionsRenderer extends React.Component {
 
 	render() {
 		if (this.state.error) {
-			console.log("Lagging");
 			return(<SimpleDialogDemo/>);
 		}
 		return (

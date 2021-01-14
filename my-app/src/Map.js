@@ -65,7 +65,6 @@ class ReactGoogleMaps extends React.Component {
 		this.setState({
 			markerList: newMarkerList
 		})
-		console.log(this.state.markerList);
 	}
 
 	handleShowMeThePath = () =>	{
