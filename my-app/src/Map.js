@@ -31,13 +31,6 @@ const MyMapComponent = compose(
     		)}
 
 		</GoogleMap>
-		<div>
-			{props.markerplace.map((item) => (
-      			<div>
-					{item.latitude}
-				</div>
-    		))}
-		</div>
 		</div>
 	));
 
