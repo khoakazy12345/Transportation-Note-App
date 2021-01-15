@@ -13,7 +13,7 @@
 
 .MyMap  {
     margin-top: 100px;
-    height: 75%;
+    height: 70vh;
 }
 
 .LocationSearchInput  {
@@ -59,4 +59,8 @@
 .ShowPathButton:hover    {
     background: #555555;
     color: white;
+}
+
+.DestinationList    {
+    overflow: scroll;
 }

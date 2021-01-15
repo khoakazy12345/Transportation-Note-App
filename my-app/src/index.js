@@ -20,6 +20,7 @@ class App extends React.Component {
 			<div className="Footer">
 				<Footer/>
 			</div>
+			
       	</body>
     	);
   	}

@@ -2,6 +2,7 @@ import React from "react";
 import { withGoogleMap, GoogleMap, withScriptjs, Marker} from "react-google-maps";
 import MapDirectionsRenderer from './MapDirection.js';
 import LocationSearchInput from './SearchBar.js';
+import DestinationList from './DestinationList.js';
 import './Map.css'
 const { compose, withProps } = require("recompose");
 
@@ -38,16 +39,22 @@ class ReactGoogleMaps extends React.Component {
 		this.state = {
 			latitude: 10.8231,
 			longitude: 106.6297,
+			destinationName: null,
+			address: null,
+			placeID: null,
+			placeIDList: [],
+			destinationList: [],
 			markerList: [],
 			searchList: [],
 			showMeThePathText: "Show Path",
 			showMeThePath: false
 		}
-		this.handleSearchBarClick = this.handleSearchBarClick.bind(this);
+		this.handleSearchBarClick1 = this.handleSearchBarClick1.bind(this);
+		this.handleSearchBarClick2 = this.handleSearchBarClick2.bind(this);
 		this.handleButtonClick = this.handleButtonClick.bind(this);
 	}
 
-	handleSearchBarClick = (lat, lng) =>	{
+	handleSearchBarClick1 = (lat, lng) =>	{
 		var searchPlace = {latitude: lat, longitude: lng};
 		var newSearchList = [];
 		newSearchList.push(searchPlace);
@@ -58,13 +65,56 @@ class ReactGoogleMaps extends React.Component {
 		});
 	}
 
+	handleSearchBarClick2 = (address, destinationName, placeID)	=>	{
+		this.setState({
+			address: address,
+			destinationName: destinationName, 
+			placeID: placeID
+		})
+	}
+
 	handleButtonClick = ()	=>	{
 		var marker = {latitude: this.state.latitude, longitude: this.state.longitude};
+		var destination = {address: this.state.address, destinationName: this.state.destinationName, placeID: this.state.placeID};
+
 		var newMarkerList = this.state.markerList;
-		newMarkerList.push(marker);
+		var newDestinationList = this.state.destinationList;
+		var newPlaceIDList = this.state.placeIDList;
+
+		// Avoid adding the same destination twice
+		if (this.state.placeIDList.includes(this.state.placeID) == false)	{
+			newDestinationList.push(destination);
+			newPlaceIDList.push(this.state.placeID);
+			newMarkerList.push(marker);
+		}
+
 		this.setState({
-			markerList: newMarkerList
+			markerList: newMarkerList,
+			destinationList: newDestinationList,
+			placeIDList: newPlaceIDList
 		})
+		console.log(this.state.markerList);
+	}
+
+	handleTest = (placeIDToRemove)	=> {
+		var currentDestinationList = this.state.destinationList;
+		var currentPlaceIDList = this.state.placeIDList;
+		var currentMarkerList = this.state.markerList;
+
+		for (let index = 0; index < currentDestinationList.length; index++)	{
+			if (currentDestinationList[index].placeID === placeIDToRemove)	{
+				currentDestinationList.splice(index, 1);
+				currentPlaceIDList.splice(index, 1);
+				currentMarkerList.splice(index, 1);
+			}
+		}
+		this.setState({
+			destinationList: currentDestinationList,
+			placeIDList: currentPlaceIDList,
+			markerList: currentMarkerList
+		})
+
+		console.log(this.state.markerList);
 	}
 
 	handleShowMeThePath = () =>	{
@@ -87,7 +137,7 @@ class ReactGoogleMaps extends React.Component {
 		return (
 			<div className="MyMapComponent">
 				<div className="LocationSearchInput">
-					<LocationSearchInput onClick={this.handleSearchBarClick}/>
+					<LocationSearchInput onClick1={this.handleSearchBarClick1} onClick2={this.handleSearchBarClick2}/>
 				</div>
 
 				<div className="MyMap">
@@ -103,6 +153,9 @@ class ReactGoogleMaps extends React.Component {
 					<button onClick={this.handleShowMeThePath} className="ShowPathButton">{this.state.showMeThePathText}</button>
 				</div>
 				
+				<div>
+					<DestinationList className="DestinationList" desList={this.state.destinationList} removeFunc={this.handleTest}/>
+				</div>
 			</div>
 		)
 	}

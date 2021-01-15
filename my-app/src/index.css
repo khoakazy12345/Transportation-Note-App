@@ -20,7 +20,8 @@ body    {
 }
 
 .Google-Map {
-    height: 120vh;
+    height: auto;
+    padding-bottom: 5px;
 }
 
 .Footer {
