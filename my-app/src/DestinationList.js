@@ -47,7 +47,7 @@ class DestinationList extends React.Component {
                                     secondary={item.address} 
                                 />
                                 <ListItemSecondaryAction>
-                                    <IconButton edge="end" onClick={() => this.props.removeFunc(item.placeID)}>
+                                    <IconButton edge="end" onClick={() => this.props.removeFunc("Hello dd")}>
                                         <DeleteIcon/>
                                     </IconButton>
                                 </ListItemSecondaryAction>
