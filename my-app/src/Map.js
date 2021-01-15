@@ -107,8 +107,26 @@ class ReactGoogleMaps extends React.Component {
 		})
 	}
 
-	handleRemovePlace = ()	=> {
-	
+	handleRemovePlace = (placeIDToRemove)	=> {
+		const newMarkerList = this.state.markerList;
+		const newDestinationList = this.state.destinationList;
+		const newPlaceIDList = this.state.placeIDList;
+
+		const index = newPlaceIDList.indexOf(placeIDToRemove);
+		console.log(index);
+		console.log(this.state.destinationList);
+
+		newMarkerList.splice(index, 1);
+		newDestinationList.splice(index, 1);
+		newPlaceIDList.splice(index, 1);
+
+		this.setState({
+			markerList: newMarkerList,
+			destinationList: newDestinationList,
+			placeIDList: newPlaceIDList,
+			searchList: []
+		})
+		console.log(this.state.destinationList);
 	}
 
 	handleShowMeThePath = () =>	{
