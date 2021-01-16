@@ -27,7 +27,7 @@ const MyMapComponent = compose(
 			))}
 			
     		{props.markerplace.length >= 2 && props.showMeThePath && (
-      			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} />
+      			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING}/>
     		)}
 
 		</GoogleMap>
@@ -41,9 +41,9 @@ class ReactGoogleMaps extends React.Component {
 		this.state = {
 			latitude: 10.8231,
 			longitude: 106.6297,
-			destinationName: null,
-			address: null,
-			placeID: null,
+			destinationName: "Ho Chi Minh City",
+			address: "Ho Chi Minh City, Vietnam",
+			placeID: "ChIJ0T2NLikpdTERKxE8d61aX_E",
 			placeIDList: [],
 			destinationList: [],
 			markerList: [],
@@ -106,8 +106,6 @@ class ReactGoogleMaps extends React.Component {
 		const newPlaceIDList = this.state.placeIDList;
 
 		const index = newPlaceIDList.indexOf(placeIDToRemove);
-		console.log(index);
-		console.log(this.state.destinationList);
 
 		newMarkerList.splice(index, 1);
 		newDestinationList.splice(index, 1);
@@ -119,7 +117,6 @@ class ReactGoogleMaps extends React.Component {
 			placeIDList: newPlaceIDList,
 			searchList: []
 		})
-		console.log(this.state.destinationList);
 	}
 
 	handleShowMeThePath = () =>	{
@@ -127,16 +124,7 @@ class ReactGoogleMaps extends React.Component {
 		this.setState({
 			showMeThePath: !newShowMeThePath
 		})
-		if (this.state.showMeThePathText == "Show Path")	{
-			this.setState({
-				showMeThePathText: "Hide Path"
-			})
-		}	else	{
-			this.setState({
-				showMeThePathText: "Show Path"
-			})
-		}
-	}
+	}  
 
 	render() {
 		return (
@@ -147,7 +135,7 @@ class ReactGoogleMaps extends React.Component {
 
 				<div className="MyMap">
 					<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList} 
-					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} showMeThePathText={this.state.showMeThePathText}/>
+					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath}/>
 				</div>
 
 				<div>
@@ -155,7 +143,7 @@ class ReactGoogleMaps extends React.Component {
 				</div>
 				
 				<div>
-					<button onClick={this.handleShowMeThePath} className="ShowPathButton">{this.state.showMeThePathText}</button>
+					<button onClick={this.handleShowMeThePath} className="ShowPathButton">{this.state.showMeThePath ? "Hide Path" : "Show Path"}</button>
 				</div>
 				
 				<div>

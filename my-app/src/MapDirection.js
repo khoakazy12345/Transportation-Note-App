@@ -42,7 +42,7 @@ class MapDirectionsRenderer extends React.Component {
 
 	render() {
 		if (this.state.error) {
-			return(<SimpleDialogDemo/>);
+			return(<SimpleDialogDemo/>)
 		}
 		return (
 			this.state.directions && (
