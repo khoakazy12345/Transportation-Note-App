@@ -23,7 +23,7 @@ class DestinationList extends React.Component {
     render() {
         return (
             <div>
-                <Grid item xs={12} spacing={2}>
+                <Grid item xs={12}>
                     <Typography variant="h4" align="center" className="Title">
                         Your Destination List
                     </Typography>

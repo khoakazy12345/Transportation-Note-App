@@ -27,7 +27,7 @@ const MyMapComponent = compose(
 			))}
 			
     		{props.markerplace.length >= 2 && props.showMeThePath && (
-      			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING}/>
+      			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} handleShowMeThePathError={props.handleShowMeThePathError}/>
     		)}
 
 		</GoogleMap>
@@ -56,6 +56,7 @@ class ReactGoogleMaps extends React.Component {
 		this.handleButtonClick = this.handleButtonClick.bind(this);
 		this.handleRemovePlace = this.handleRemovePlace.bind(this);
 		this.handleShowMeThePath = this.handleShowMeThePath.bind(this);
+		this.handleShowMeThePathError = this.handleShowMeThePathError.bind(this);
 	}
 
 	handleSearchBarClick1 = (lat, lng) =>	{
@@ -124,7 +125,13 @@ class ReactGoogleMaps extends React.Component {
 		this.setState({
 			showMeThePath: !newShowMeThePath
 		})
-	}  
+	}
+	
+	handleShowMeThePathError = ()	=>	{
+		this.setState({
+			showMeThePath: false
+		})
+	}
 
 	render() {
 		return (
@@ -135,7 +142,7 @@ class ReactGoogleMaps extends React.Component {
 
 				<div className="MyMap">
 					<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList} 
-					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath}/>
+					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} handleShowMeThePathError={this.handleShowMeThePathError}/>
 				</div>
 
 				<div>
