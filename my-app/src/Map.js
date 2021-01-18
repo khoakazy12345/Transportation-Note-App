@@ -1,5 +1,5 @@
 import React from "react";
-import { withGoogleMap, GoogleMap, withScriptjs, Marker} from "react-google-maps";
+import { withGoogleMap, GoogleMap, withScriptjs, Marker } from "react-google-maps";
 import MapDirectionsRenderer from './MapDirection.js';
 import LocationSearchInput from './SearchBar.js';
 import DestinationList from './DestinationList.js';
@@ -18,24 +18,24 @@ const MyMapComponent = compose(
 	withScriptjs,
 	withGoogleMap)(props => (
 		<div>
-		<GoogleMap defaultZoom={5} center={{ lat: props.latitude, lng: props.longitude }}>
-			{props.markerplace.map((item) => (
-      			<Marker position={{lat: item.latitude, lng: item.longitude}} draggable = {true}/>
-    		))}
+			<GoogleMap defaultZoom={5} center={{ lat: props.latitude, lng: props.longitude }}>
+				{props.markerplace.map((item) => (
+					<Marker position={{ lat: item.latitude, lng: item.longitude }} draggable={true} />
+				))}
 
-    		{props.searchplace.map((item)	=>	(
-				<Marker position={{lat: item.latitude, lng: item.longitude}} />
-			))}
+				{props.searchplace.map((item) => (
+					<Marker position={{ lat: item.latitude, lng: item.longitude }} />
+				))}
 
-			{props.enoughPlace	
-			? console.log("Yes")
-			: console.log("No")}
-			
-    		{props.markerplace.length >= 2 && props.showMeThePath && (
-      			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} />
-    		)}
+				{props.enoughPlace
+					? console.log("Yes")
+					: console.log("No")}
 
-		</GoogleMap>
+				{props.markerplace.length >= 2 && props.showMeThePath && (
+					<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} />
+				)}
+
+			</GoogleMap>
 		</div>
 	));
 
@@ -62,8 +62,8 @@ class ReactGoogleMaps extends React.Component {
 		this.handleShowMeThePath = this.handleShowMeThePath.bind(this);
 	}
 
-	handleSearchBarClick1 = (lat, lng) =>	{
-		const searchPlace = {latitude: lat, longitude: lng};
+	handleSearchBarClick1 = (lat, lng) => {
+		const searchPlace = { latitude: lat, longitude: lng };
 		const newSearchList = [];
 		newSearchList.push(searchPlace);
 		this.setState({
@@ -73,24 +73,24 @@ class ReactGoogleMaps extends React.Component {
 		});
 	}
 
-	handleSearchBarClick2 = (address, destinationName, placeID)	=>	{
+	handleSearchBarClick2 = (address, destinationName, placeID) => {
 		this.setState({
 			address: address,
-			destinationName: destinationName, 
+			destinationName: destinationName,
 			placeID: placeID
 		})
 	}
 
-	handleButtonClick = ()	=>	{
-		const marker = {latitude: this.state.latitude, longitude: this.state.longitude};
-		const destination = {address: this.state.address, destinationName: this.state.destinationName, placeID: this.state.placeID};
+	handleButtonClick = () => {
+		const marker = { latitude: this.state.latitude, longitude: this.state.longitude };
+		const destination = { address: this.state.address, destinationName: this.state.destinationName, placeID: this.state.placeID };
 
 		const newMarkerList = this.state.markerList;
 		const newDestinationList = this.state.destinationList;
 		const newPlaceIDList = this.state.placeIDList;
 
 		// Avoid adding the same destination twice
-		if (this.state.placeIDList.includes(this.state.placeID) == false)	{
+		if (this.state.placeIDList.includes(this.state.placeID) == false) {
 			newDestinationList.push(destination);
 			newPlaceIDList.push(this.state.placeID);
 			newMarkerList.push(marker);
@@ -102,32 +102,32 @@ class ReactGoogleMaps extends React.Component {
 			placeIDList: newPlaceIDList,
 			searchList: []
 		})
-		for (var i = 0; i < this.state.destinationList.length; i++){
+		for (var i = 0; i < this.state.destinationList.length; i++) {
 			console.log(this.state.destinationList[i])
 		}
 	}
 
-	handleOptimalButtonClick = ()	=>	{
+	handleOptimalButtonClick = () => {
 		fetch('http://localhost:5000/api/showpath', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-	  body: JSON.stringify({destination: this.state.destinationList})
-    })
-      .then(response => response.json())
-      .then(json => {
-        const optimalList = json.optimalList;
-		// Do something to update Direction Rerender
-		console.log(optimalList)
-      })
-      .catch(error => {
-        console.log("Error!")
-      });
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ destination: this.state.destinationList })
+		})
+			.then(response => response.json())
+			.then(json => {
+				const optimalList = json.optimalList;
+				// Do something to update Direction Rerender
+				console.log(optimalList)
+			})
+			.catch(error => {
+				console.log("Error!")
+			});
 	}
 
-	handleRemovePlace = (placeIDToRemove)	=> {
+	handleRemovePlace = (placeIDToRemove) => {
 		const newMarkerList = this.state.markerList;
 		const newDestinationList = this.state.destinationList;
 		const newPlaceIDList = this.state.placeIDList;
@@ -146,28 +146,28 @@ class ReactGoogleMaps extends React.Component {
 		})
 	}
 
-	handleShowMeThePath = () =>	{
-		if (this.state.destinationList.length > 1)	{
+	handleShowMeThePath = () => {
+		if (this.state.destinationList.length > 1) {
 			const newShowMeThePath = this.state.showMeThePath;
 			this.setState({
 				showMeThePath: !newShowMeThePath,
 			})
-		}	else	{
-			<SimpleDialogDemo/>
-		}	
+		} else {
+			<SimpleDialogDemo />
+		}
 	}
-	
+
 	render() {
 
 		return (
 			<div className="MyMapComponent">
 				<div className="LocationSearchInput">
-					<LocationSearchInput onClick1={this.handleSearchBarClick1} onClick2={this.handleSearchBarClick2}/>
+					<LocationSearchInput onClick1={this.handleSearchBarClick1} onClick2={this.handleSearchBarClick2} />
 				</div>
 
 				<div className="MyMap">
-					<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList} 
-					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} enoughPlace={this.state.enoughPlace}
+					<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList}
+						markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} enoughPlace={this.state.enoughPlace}
 					/>
 				</div>
 
@@ -182,9 +182,9 @@ class ReactGoogleMaps extends React.Component {
 				<div>
 					<button onClick={this.handleOptimalButtonClick} className="ShowPathButton">Show Optimal Path</button>
 				</div>
-				
+
 				<div>
-					<DestinationList className="DestinationList" desList={this.state.destinationList} removeFunc={this.handleRemovePlace}/>
+					<DestinationList className="DestinationList" desList={this.state.destinationList} removeFunc={this.handleRemovePlace} />
 				</div>
 			</div>
 		)
