@@ -9,7 +9,7 @@ Key for Google API: AIzaSyD3C-R7oog-Ni87FFRrE-BYQMaKhX9vLAE
 
 Target:
 + Hieu: Conneting front end and back end.
-+ Front-end: Fixing Bugs, Making Notes on Marker.
++ Front-end: Fixing Bugs, Making Notes on Marker (Khoa + Jose).
 + Back-end: Try to make the back end works just the same with coordinates.
 
 To-be-fixed Bugs:
