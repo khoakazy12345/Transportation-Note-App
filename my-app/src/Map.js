@@ -3,6 +3,7 @@ import { withGoogleMap, GoogleMap, withScriptjs, Marker} from "react-google-maps
 import MapDirectionsRenderer from './MapDirection.js';
 import LocationSearchInput from './SearchBar.js';
 import DestinationList from './DestinationList.js';
+import SimpleDialogDemo from './AlertBox.js';
 import './Map.css'
 const { compose, withProps } = require("recompose");
 
@@ -25,9 +26,13 @@ const MyMapComponent = compose(
     		{props.searchplace.map((item)	=>	(
 				<Marker position={{lat: item.latitude, lng: item.longitude}} />
 			))}
+
+			{props.enoughPlace	
+			? console.log("Yes")
+			: console.log("No")}
 			
     		{props.markerplace.length >= 2 && props.showMeThePath && (
-      			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} handleShowMeThePathError={props.handleShowMeThePathError}/>
+      			<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} />
     		)}
 
 		</GoogleMap>
@@ -48,7 +53,6 @@ class ReactGoogleMaps extends React.Component {
 			destinationList: [],
 			markerList: [],
 			searchList: [],
-			showMeThePathText: "Show Path",
 			showMeThePath: false
 		}
 		this.handleSearchBarClick1 = this.handleSearchBarClick1.bind(this);
@@ -56,7 +60,6 @@ class ReactGoogleMaps extends React.Component {
 		this.handleButtonClick = this.handleButtonClick.bind(this);
 		this.handleRemovePlace = this.handleRemovePlace.bind(this);
 		this.handleShowMeThePath = this.handleShowMeThePath.bind(this);
-		this.handleShowMeThePathError = this.handleShowMeThePathError.bind(this);
 	}
 
 	handleSearchBarClick1 = (lat, lng) =>	{
@@ -121,19 +124,18 @@ class ReactGoogleMaps extends React.Component {
 	}
 
 	handleShowMeThePath = () =>	{
-		const newShowMeThePath = this.state.showMeThePath;
-		this.setState({
-			showMeThePath: !newShowMeThePath
-		})
+		if (this.state.destinationList.length > 1)	{
+			const newShowMeThePath = this.state.showMeThePath;
+			this.setState({
+				showMeThePath: !newShowMeThePath,
+			})
+		}	else	{
+			<SimpleDialogDemo/>
+		}	
 	}
 	
-	handleShowMeThePathError = ()	=>	{
-		this.setState({
-			showMeThePath: false
-		})
-	}
-
 	render() {
+
 		return (
 			<div className="MyMapComponent">
 				<div className="LocationSearchInput">
@@ -142,13 +144,14 @@ class ReactGoogleMaps extends React.Component {
 
 				<div className="MyMap">
 					<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList} 
-					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} handleShowMeThePathError={this.handleShowMeThePathError}/>
+					markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} enoughPlace={this.state.enoughPlace}
+					/>
 				</div>
 
 				<div>
 					<button onClick={this.handleButtonClick} className="AddButton">Add Destination</button>
 				</div>
-				
+
 				<div>
 					<button onClick={this.handleShowMeThePath} className="ShowPathButton">{this.state.showMeThePath ? "Hide Path" : "Show Path"}</button>
 				</div>

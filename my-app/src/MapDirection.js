@@ -35,7 +35,6 @@ class MapDirectionsRenderer extends React.Component {
 						directions: result
 					});
 				} else {
-					console.log(result);
 					this.setState({ error: result });
 				}
 			});
