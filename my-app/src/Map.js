@@ -102,6 +102,29 @@ class ReactGoogleMaps extends React.Component {
 			placeIDList: newPlaceIDList,
 			searchList: []
 		})
+		for (var i = 0; i < this.state.destinationList.length; i++){
+			console.log(this.state.destinationList[i])
+		}
+	}
+
+	handleOptimalButtonClick = ()	=>	{
+		fetch('http://localhost:5000/api/showpath', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+	  body: JSON.stringify({destination: this.state.destinationList})
+    })
+      .then(response => response.json())
+      .then(json => {
+        const optimalList = json.optimalList;
+		// Do something to update Direction Rerender
+		console.log(optimalList)
+      })
+      .catch(error => {
+        console.log("Error!")
+      });
 	}
 
 	handleRemovePlace = (placeIDToRemove)	=> {
@@ -154,6 +177,10 @@ class ReactGoogleMaps extends React.Component {
 
 				<div>
 					<button onClick={this.handleShowMeThePath} className="ShowPathButton">{this.state.showMeThePath ? "Hide Path" : "Show Path"}</button>
+				</div>
+
+				<div>
+					<button onClick={this.handleOptimalButtonClick} className="ShowPathButton">Show Optimal Path</button>
 				</div>
 				
 				<div>
