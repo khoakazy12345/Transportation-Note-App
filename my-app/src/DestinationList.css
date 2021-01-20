@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kurale&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+
+.Title  {
+    font-family: 'Raleway', sans-serif;
+}
+
+.ListItem    {
+    background-color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: xx-large;
+}
+
+.EmptyList  {
+    background-color: white;
+    margin-top: 20px;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Raleway';
+    font-size: x-large;
+}

@@ -8,5 +8,10 @@
 Key for Google API: AIzaSyD3C-R7oog-Ni87FFRrE-BYQMaKhX9vLAE
 
 Target:
-+ Front-end: Display Route, Zoom Minimize, Change View when add a point.
-+ Back-end: Return the true list (not optimal at this time).
++ Hieu: Conneting front end and back end.
++ Front-end: Fixing Bugs, Making Notes on Marker (Khoa + Jose).
++ Back-end: Try to make the back end works just the same with coordinates.
+
+To-be-fixed Bugs:
++ Front-end: Show/Hide button bug when the API return "ZERO-RESULT" status (no connection between two points). 
++ Notes: I tried to set global variable (not working in JSX), tried to pass function and setState (not working because you cannot setState in render method)

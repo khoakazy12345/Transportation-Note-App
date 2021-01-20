@@ -35,14 +35,14 @@ class MapDirectionsRenderer extends React.Component {
 						directions: result
 					});
 				} else {
-					this.setState({ error: result })
+					this.setState({ error: result });
 				}
 			});
 	}
 
 	render() {
 		if (this.state.error) {
-			return(<SimpleDialogDemo/>);
+			return(<SimpleDialogDemo/>)
 		}
 		return (
 			this.state.directions && (

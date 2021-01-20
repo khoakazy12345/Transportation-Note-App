@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
 
 .MyMapComponent {
     display: block;
@@ -46,6 +46,7 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
     width: 15%;
     border: 2px solid black;
     border-color: #e7e7e7;
@@ -62,5 +63,6 @@
 }
 
 .DestinationList    {
-    overflow: scroll;
+    margin-top: 100px;
+    padding-top: 100px;
 }
