@@ -32,7 +32,7 @@ const MyMapComponent = compose(
 					: console.log("No")}
 
 				{props.markerplace.length >= 2 && props.showMeThePath && (
-					<MapDirectionsRenderer places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} />
+					<MapDirectionsRenderer onError={props.onError} places={props.markerplace} travelMode={google.maps.TravelMode.DRIVING} />
 				)}
 
 			</GoogleMap>
@@ -53,13 +53,17 @@ class ReactGoogleMaps extends React.Component {
 			destinationList: [],
 			markerList: [],
 			searchList: [],
-			showMeThePath: false
+			showMeThePath: false,
+			noRouteError: false,
+			notEnoughDestinationError: false
 		}
 		this.handleSearchBarClick1 = this.handleSearchBarClick1.bind(this);
 		this.handleSearchBarClick2 = this.handleSearchBarClick2.bind(this);
 		this.handleButtonClick = this.handleButtonClick.bind(this);
 		this.handleRemovePlace = this.handleRemovePlace.bind(this);
 		this.handleShowMeThePath = this.handleShowMeThePath.bind(this);
+		this.handleNoRouteErrorOpen = this.handleNoRouteErrorOpen.bind(this);
+		this.handleNoRouteErrorClose = this.handleNoRouteErrorClose.bind(this);
 	}
 
 	handleSearchBarClick1 = (lat, lng) => {
@@ -102,9 +106,6 @@ class ReactGoogleMaps extends React.Component {
 			placeIDList: newPlaceIDList,
 			searchList: []
 		})
-		for (var i = 0; i < this.state.destinationList.length; i++) {
-			console.log(this.state.destinationList[i])
-		}
 	}
 
 	handleOptimalButtonClick = () => {
@@ -152,15 +153,46 @@ class ReactGoogleMaps extends React.Component {
 			this.setState({
 				showMeThePath: !newShowMeThePath,
 			})
-		} else {
-			<SimpleDialogDemo />
+		}	else	{
+			this.setState({
+				notEnoughDestinationError: true
+			})
 		}
+	}
+
+	handleNotEnoughDestinationErrorClose = ()	=>	{
+		this.setState({
+			notEnoughDestinationError: false
+		})
+	}
+
+	handleNoRouteErrorOpen = ()	=>	{
+		this.setState({	
+			showMeThePath: false,
+			noRouteError: true
+		})
+	}
+
+	handleNoRouteErrorClose = ()	=>	{
+		this.setState({	
+			noRouteError: false
+		})
 	}
 
 	render() {
 
 		return (
 			<div className="MyMapComponent">
+				<div>
+					{this.state.noRouteError && <SimpleDialogDemo onClose={this.handleNoRouteErrorClose} 
+					title={"No Possible Route Error"} body={"Looks like there is no driving route through all you destinations. Consider dropping some of them."}/>}
+				</div>
+
+				<div>
+					{this.state.notEnoughDestinationError && <SimpleDialogDemo onClose={this.handleNotEnoughDestinationErrorClose} 
+					title={"Not Enough Destination Error"} body={"You do not have two or more destination. Consider add more before moving on."}/>}
+				</div>
+
 				<div className="LocationSearchInput">
 					<LocationSearchInput onClick1={this.handleSearchBarClick1} onClick2={this.handleSearchBarClick2} />
 				</div>
@@ -168,6 +200,7 @@ class ReactGoogleMaps extends React.Component {
 				<div className="MyMap">
 					<MyMapComponent latitude={this.state.latitude} longitude={this.state.longitude} searchplace={this.state.searchList}
 						markerplace={this.state.markerList} showMeThePath={this.state.showMeThePath} enoughPlace={this.state.enoughPlace}
+						onError={this.handleNoRouteErrorOpen}
 					/>
 				</div>
 

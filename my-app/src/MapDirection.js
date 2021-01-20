@@ -42,7 +42,7 @@ class MapDirectionsRenderer extends React.Component {
 
 	render() {
 		if (this.state.error) {
-			return(<SimpleDialogDemo/>)
+			this.props.onError();
 		}
 		return (
 			this.state.directions && (
@@ -50,5 +50,6 @@ class MapDirectionsRenderer extends React.Component {
 			));
 	}
 }
+
 
 export default MapDirectionsRenderer;

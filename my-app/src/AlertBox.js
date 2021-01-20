@@ -18,6 +18,7 @@ class AlertDialog extends React.Component {
     }
 
     handleClose = () => {
+        this.props.onClose();
         this.setState({
             open: false
         })
@@ -30,10 +31,10 @@ class AlertDialog extends React.Component {
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-                    <DialogTitle id="alert-dialog-title">{"Error"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{this.props.title}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Looks like there is no driving route through all you destinations. Consider dropping some of them.
+                            {this.props.body}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
