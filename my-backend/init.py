@@ -2,17 +2,18 @@ import urllib.request
 import json
 from tsp import *
 import math
+import os
 import numpy as np
 
 inf = 0
 
-file = open('c:\\Users\\Jose Salinas\\Desktop\\Projects\\Hack_Ohio\\Hack_Ohio_2021\\my-backend\\key.txt','r')
+file = open(os.path.abspath('key.txt'),'r')
 key = file.read().strip()
 
 vector = []
 firstTime = False
 
-addrRead = open('c:\\Users\\Jose Salinas\\Desktop\\Projects\\Hack_Ohio\\Hack_Ohio_2021\\my-backend\\addr.txt','r')
+addrRead = open(os.path.abspath('addr.txt'),'r')
 
 vectorList = addrRead.read().splitlines()
 
@@ -47,9 +48,16 @@ for i in range(len(vector)):
             response = json.loads(response.read())
             graph[i][j] = response['rows'][0]['elements'][0]['duration']['value']
             
-print(vector)
 distanceMatrix = np.array(graph, dtype=float)
-print(TSP_dynamic(listLength,distanceMatrix))
+distance = TSP_dynamic(listLength,distanceMatrix)
+
+oFile = open('optimal.txt', 'w')
+for i in range(len(distance)):
+    if i == 0:
+        oFile.write(str(distance[i]))
+    else:
+        oFile.write(" " + str(distance[i]))
+    
 
 # file = open('arr.txt','w')
 # for i in range(len(vector)):

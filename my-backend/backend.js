@@ -12,11 +12,13 @@ app.use(express.urlencoded({extended: true}));
 app.post('/addr',(req,res) => {
     let size = req.body.addresses.length;
     let addrArr = req.body.addresses;
+    let data = "";
+    let data2 = "";
     for(let i = 0; i < size; i++){
         if (_.isObject(addrArr[i]))
-            let data = addrArr[i].latitude + "," + addrArr[i].longitude + "\n";
+            data = addrArr[i].latitude + "," + addrArr[i].longitude + "\n";
         else
-            let data = addrArr[i] + ","
+            data = addrArr[i] + "\n"
         if(i == 0){
             fs.writeFile('addr.txt', data, (err) => {
                 if(err) throw err;
@@ -31,8 +33,17 @@ app.post('/addr',(req,res) => {
     const python = spawn('python',['init.py']);
     python.on('exit',(code)=>{
         console.log('Python script done');
+        data2 = fs.readFileSync('optimal.txt',{encoding:'utf8', flag:'r'});
+        var textBySpace = data2.split(' ');
+        var arr = [];
+        for (let i = 0; i < textBySpace.length; i++)
+            arr.push(Number(textBySpace[i]));
+        var obj = {
+            optimal:arr
+        }
+        res.send(obj);
     });
-    res.send();
+    
 });
 
 app.listen(8080,()=>{
