@@ -40,4 +40,4 @@ npm start
 
 ___
 ## License
-gomokuAI is [MIT Licensed](https://github.com/miamicourseproject/gomokuAI/blob/master/LICENSE).
+Transportation Note App is [MIT Licensed](https://github.com/miamicourseproject/gomokuAI/blob/master/LICENSE).
